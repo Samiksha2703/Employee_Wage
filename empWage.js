@@ -3,8 +3,12 @@ const IS_FULL_TIME = 2;
 const PART_TIME_HOURS = 4;
 const FULL_TIME_HOURS = 8;
 const WAGE_PER_HOUR = 20;
-const NUM_OF_WORKING_DAYS = 10;
-const MAX_HRS_IN_MONTH = 100;
+const NUM_OF_WORKING_DAYS = 20;
+const MAX_HRS_IN_MONTH = 160;
+let totalEmpHrs = 0;
+let totalWorkingDays = 0;
+let empWageArray = new Array();
+let empDailyWageMap = new Map();
 
 function getWorkingHours(empCheck) {
     switch (empCheck) {
@@ -25,9 +29,6 @@ function sum(dailyWage) {
     totEmpWage += dailyWage;
 }
 
-let totalEmpHrs = 0;
-let totalWorkingDays = 0;
-let empWageArray = new Array();
 let totEmpWage = 0;
 while (totalEmpHrs <= MAX_HRS_IN_MONTH && totalWorkingDays < NUM_OF_WORKING_DAYS) {
     totalWorkingDays++;
@@ -35,6 +36,7 @@ while (totalEmpHrs <= MAX_HRS_IN_MONTH && totalWorkingDays < NUM_OF_WORKING_DAYS
     let empHrs = getWorkingHours(empCheck);
     totalEmpHrs += empHrs;
     empWageArray.push(calculateWage(empHrs));
+    empDailyWageMap.set(totalWorkingDays, calculateWage(empHrs));
 }
 
 //UC 7A - Calc total wage using Array forEach traversal or reduce method
@@ -88,3 +90,7 @@ function totalDaysWorked(numOfDays, dailyWage){
     return numOfDays;
 }
 console.log("UC7G - Number of Days Emp Worked : "+empWageArray.reduce(totalDaysWorked, 0));
+
+//UC 8 - Calculate employee wage with employee wage map
+console.log(empDailyWageMap);
+console.log("UC8 - Emp Wage Map totalHrs : "+Array.from(empDailyWageMap.values()).reduce(totalWages, 0));
