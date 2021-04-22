@@ -10,6 +10,7 @@ let totalWorkingDays = 0;
 let empWageArray = new Array();
 let empDailyWageMap = new Map();
 let empDailyHrsMap = new Map();
+let empHrsAndWageArray = new Array();
 
 function getWorkingHours(empCheck) {
     switch (empCheck) {
@@ -39,6 +40,14 @@ while (totalEmpHrs <= MAX_HRS_IN_MONTH && totalWorkingDays < NUM_OF_WORKING_DAYS
     empWageArray.push(calculateWage(empHrs));
     empDailyWageMap.set(totalWorkingDays, calculateWage(empHrs));
     empDailyHrsMap.set(totalWorkingDays, empHrs);
+    empHrsAndWageArray.push({
+        dayNum: totalWorkingDays,
+        dailyHours: empHrs,
+        dailyWage: calculateWage(empHrs),
+        toString() {
+            return '\nDay ' + this.dayNum + ' => Working Hours is ' + this.dailyHours + ' And Wage Earned = ' + this.dailyWage
+        },
+    });
 }
 
 //UC 7A - Calc total wage using Array forEach traversal or reduce method
@@ -117,3 +126,6 @@ empDailyHrsMap.forEach((value, key, map) => {
 console.log("Full Working Days : " + fullWorkingDays);
 console.log("Part Working Days : " + partWorkingDays);
 console.log("Non Working Days : " + nonWorkingDays);
+
+//UC 10 - Object Creation
+console.log("UC 10 Showing Daily Hours Worked and Wage Earned : " + empHrsAndWageArray);
