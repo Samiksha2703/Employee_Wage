@@ -17,13 +17,18 @@ function getWorkingHours(empCheck) {
     }
 }
 
-function calculateWage(empHrs){
+function calculateWage(empHrs) {
     return empHrs * WAGE_PER_HOUR;
+}
+
+function sum(dailyWage) {
+    totEmpWage += dailyWage;
 }
 
 let totalEmpHrs = 0;
 let totalWorkingDays = 0;
 let empWageArray = new Array();
+let totEmpWage = 0;
 while (totalEmpHrs <= MAX_HRS_IN_MONTH && totalWorkingDays < NUM_OF_WORKING_DAYS) {
     totalWorkingDays++;
     let empCheck = Math.floor(Math.random() * 10) % 3;
@@ -32,5 +37,12 @@ while (totalEmpHrs <= MAX_HRS_IN_MONTH && totalWorkingDays < NUM_OF_WORKING_DAYS
     empWageArray.push(calculateWage(empHrs));
 }
 
-let empWage = calculateWage(totalEmpHrs);
-console.log("Total Days : " + totalWorkingDays + " Total Hrs : " + totalEmpHrs + " Emp Wage : " + empWage);
+empWageArray.forEach(sum);
+console.log("UC7A - Total Days : " + totalWorkingDays + " Total Hrs : " + totalEmpHrs + " Emp Wage : " + totEmpWage);
+
+function totalWages(totalWage, dailyWage) {
+    return totalWage += dailyWage;
+}
+
+console.log("UC7A - Emp Wage with reduce : " + empWageArray.reduce(totalWages, 0))
+
