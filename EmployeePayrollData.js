@@ -15,6 +15,17 @@ class EmployeePayrollData {
     }
 
     // getter and setter method
+
+    get id() {
+        return this._id;
+    }
+    set id(id) {
+        let idRegex = RegExp("^[1-9][0-9]*$");
+        if (idRegex.test(id))
+            this._id = id;
+        else throw 'ID is Incorrect!';
+    }
+
     get name() {
         return this._name;
     }
@@ -23,6 +34,33 @@ class EmployeePayrollData {
         if (nameRegex.test(name))
             this._name = name;
         else throw 'Name is Incorrect!';
+    }
+
+    get salary() {
+        return this._salary;
+    }
+    set salary(salary) {
+        let salaryRegex = RegExp("^[1-9][0-9]*$");
+        if (salaryRegex.test(salary))
+            this._salary = salary;
+        else throw 'Salary is Incorrect!';
+    }
+
+    get gender() {
+        return this._gender;
+    }
+    set gender(gender) {
+        let genderRegex = RegExp("[MF]{1}$");
+        if (genderRegex.test(gender))
+            this._gender = gender;
+        else throw 'Gender is Incorrect!';
+    }
+
+    get startDate() {
+        return this._startDate;
+    }
+    set startDate(startDate) {
+        this._startDate = startDate;
     }
 
     // method 
@@ -46,3 +84,10 @@ catch (e) {
 }
 let newEmployeePayrollData = new EmployeePayrollData(1, "Terrisa", 30000, "F", new Date());
 console.log(newEmployeePayrollData.toString());
+try {
+    let employeePayrollDataNew = new EmployeePayrollData(0, "Peter", 0, "T", new Date());
+    console.log(employeePayrollDataNew.toString());
+}
+catch (e) {
+    console.error(e);
+}
